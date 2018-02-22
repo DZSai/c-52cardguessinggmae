@@ -1,0 +1,146 @@
+/*
+ ============================================================================
+ Name        : P1.c
+ Author      : David Zych
+ Version     :
+ Copyright   : Your copyright notice
+ Description : 52 Card Guessing Game in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <string.h>
+#include <time.h>
+#include <stdlib.h>
+
+int main(void) {
+    char deck[52][3];
+    int s, v, c = 0;
+    const char suits[4] = { 'H', 'D', 'S', 'C' };
+    const char values[13] = { '2', '3', '4', '5', '6', '7', '8', '9', 'X', 'J', 'Q', 'K', 'A' };
+    char randomS;
+    char randomV;
+    char guessS;
+    char guessV;
+
+    printf("Welcome to the 52 card guessing game! If you want to quit, enter 0 into the question.\n"); //Welcome greeting.
+
+    for(;;) {
+		printf("Select the suit you think the card is (Heart = H, Diamond = D, Spades = S, Clubs = C): ");
+		srand(time(NULL));
+		randomS = suits[rand() % 4];
+		randomV = values[rand() % 13];
+		//printf("\n%c", randomS);
+		//printf("%c\n", randomV);
+		//scanf("%c", &guessS); //Scanning input for the guess for suit.
+		for(;;) {
+			fflush(stdout);
+		do{
+			scanf("%c", &guessS);
+		}
+		while( guessS == '\n');
+		while ( getchar() != '\n' );
+		//printf("%c\n", guessS);
+		if(guessS == 'D' | guessS == 'H' | guessS == 'C' | guessS == 'S' | guessS == '0') {
+			break;
+			}
+		else {
+			printf("Error: Not a valid suit. Ending game.\n");
+			return 0;
+			}
+		}
+		if(guessS == '0') {
+				printf("You have ended the game. See you next time.");
+				break;
+				}
+		//printf("%c\n", guessS);
+		if(guessS == randomS) {
+			printf("That is the correct suit.\n");
+			printf("Now select the value you think the card is (2-9, X = 10, J, Q, K, A): \n");
+
+			fflush(stdout);
+			//while ( getchar() == '\n' );
+
+			//scanf("%c", &guessV);
+		for(;;) {
+			fflush(stdout);
+			do{
+				scanf("%c", &guessV);
+			}
+			while( guessV == '\n');
+			if(guessV == '2' | guessV == '3' | guessV == '4' | guessV == '5' | guessV == '6' | guessV == '7' | guessV == '8' | guessV == '9' | guessV == 'X' | guessV == 'J'| guessV == 'Q' | guessV == 'K' | guessV == 'A' | guessV == '0') {
+				break;
+			}
+			else {
+				printf("Error: Not a valid value. Ending game.\n");
+				return 0;
+				}
+			if(guessV == '0') {
+				printf("You have ended the game. See you next time.");
+				return 0;
+			}
+		}
+			//printf("%c\n", guessV);
+			if(guessV == randomV){
+				printf("That is the correct value.\nCongratulations on guessing correct card, You Win!\n");
+				break;
+			}
+			else {
+				printf("That is the wrong value, please try again.\n");
+			}
+			}
+
+		else {
+			printf("That is the wrong suit, please try again.\n");
+		}
+    }
+    return 0;
+}
+
+/*
+1.Welcome to the 52 card guessing game! If you want to quit, enter 0 into the question.
+Select the suit you think the card is (Heart = H, Diamond = D, Spades = S, Clubs = C):
+D9
+D
+That is the correct suit.
+Now select the value you think the card is (2-9, X = 10, J, Q, K, A):
+9
+That is the correct value.
+Congratulations on guessing correct card, You Win!
+
+2.Welcome to the 52 card guessing game! If you want to quit, enter 0 into the question.
+Select the suit you think the card is (Heart = H, Diamond = D, Spades = S, Clubs = C):
+S9
+H
+That is the wrong suit, please try again.
+Select the suit you think the card is (Heart = H, Diamond = D, Spades = S, Clubs = C):
+D5
+D
+That is the correct suit.
+Now select the value you think the card is (2-9, X = 10, J, Q, K, A):
+5
+That is the correct value.
+Congratulations on guessing correct card, You Win!
+
+3.Welcome to the 52 card guessing game! If you want to quit, enter 0 into the question.
+Select the suit you think the card is (Heart = H, Diamond = D, Spades = S, Clubs = C):
+D6
+0
+You have ended the game. See you next time.
+
+4.Welcome to the 52 card guessing game! If you want to quit, enter 0 into the question.
+Select the suit you think the card is (Heart = H, Diamond = D, Spades = S, Clubs = C):
+D4
+M
+Error: Not a valid suit. Ending game.
+
+5.Welcome to the 52 card guessing game! If you want to quit, enter 0 into the question.
+Select the suit you think the card is (Heart = H, Diamond = D, Spades = S, Clubs = C):
+H5
+H
+That is the correct suit.
+Now select the value you think the card is (2-9, X = 10, J, Q, K, A):
+5
+That is the correct value.
+Congratulations on guessing correct card, You Win!
+*/
